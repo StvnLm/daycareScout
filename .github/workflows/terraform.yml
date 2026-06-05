@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check AWS account variable
+        run: |
+          test -n "${{ vars.AWS_ACCOUNT_ID }}" || (echo "AWS_ACCOUNT_ID is empty" && exit 1)
+          echo "AWS_ACCOUNT_ID=${{ vars.AWS_ACCOUNT_ID }}"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
         with:
