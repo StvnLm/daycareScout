@@ -1,6 +1,9 @@
 name: Terraform
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
@@ -11,6 +14,7 @@ permissions:
 
 jobs:
   terraform-plan:
+    environment: env-var
     runs-on: ubuntu-latest
 
     defaults:
