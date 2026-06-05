@@ -35,6 +35,7 @@ data "aws_iam_policy_document" "github_actions_trust" {
         "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/main",
         "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/feature/*",
         "repo:${local.github_owner}/${local.github_repo}:pull_request",
+        "repo:${local.github_owner}/${local.github_repo}:environment:env-var",
       ]
     }
   }
