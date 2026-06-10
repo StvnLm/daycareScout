@@ -1,6 +1,6 @@
 locals {
   github_owner  = "StvnLm"
-  github_repo   = "terraform-daycarewatch"
+  github_repo   = "daycareScout"
   github_branch = "main"
 
   role_name = "github-actions-${local.github_repo}"
