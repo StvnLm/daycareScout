@@ -6,11 +6,6 @@ locals {
   github_subject_prefix = "repo:${local.github_owner}/${local.github_repo}"
 }
 
-#########################################################
-# To do: create new S3 bucket (daycareScout) and update #
-# the backend state bucket to use new naming            # 
-#########################################################
-
 resource "aws_iam_openid_connect_provider" "github" {
   url            = "https://token.actions.githubusercontent.com"
   client_id_list = ["sts.amazonaws.com"]
@@ -55,7 +50,7 @@ resource "aws_iam_role_policy" "github_actions_backend_access" {
         Action = [
           "s3:ListBucket"
         ]
-        Resource = "arn:aws:s3:::terraform-daycarewatch"
+        Resource = "arn:aws:s3:::terraform-daycarescout"
         Condition = {
           StringLike = {
             "s3:prefix" = [
@@ -71,7 +66,7 @@ resource "aws_iam_role_policy" "github_actions_backend_access" {
           "s3:GetObject",
           "s3:PutObject"
         ]
-        Resource = "arn:aws:s3:::terraform-daycarewatch/us-east-1/terraform.tfstate"
+        Resource = "arn:aws:s3:::terraform-daycarescout/us-east-1/terraform.tfstate"
       },
       {
         Effect = "Allow"
@@ -80,7 +75,7 @@ resource "aws_iam_role_policy" "github_actions_backend_access" {
           "s3:PutObject",
           "s3:DeleteObject"
         ]
-        Resource = "arn:aws:s3:::terraform-daycarewatch/us-east-1/terraform.tfstate.tflock"
+        Resource = "arn:aws:s3:::terraform-daycarescout/us-east-1/terraform.tfstate.tflock"
       }
     ]
   })
