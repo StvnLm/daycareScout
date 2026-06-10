@@ -1,11 +1,9 @@
 locals {
-  github_owner  = "StvnLm"
-  github_repo   = "daycareScout"
-  github_branch = "main"
+  github_owner = "StvnLm"
+  github_repo  = "daycareScout"
+  role_name    = "github-actions-${local.github_repo}"
 
-  role_name = "github-actions-${local.github_repo}"
-
-  github_subject = "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/${local.github_branch}"
+  github_subject_prefix = "repo:${local.github_owner}/${local.github_repo}"
 }
 
 #########################################################
@@ -37,10 +35,9 @@ data "aws_iam_policy_document" "github_actions_trust" {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/main",
-        "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/feature/*",
-        "repo:${local.github_owner}/${local.github_repo}:pull_request",
-        "repo:${local.github_owner}/${local.github_repo}:environment:env-var",
+        "${local.github_subject_prefix}:ref:refs/heads/*",
+        "${local.github_subject_prefix}:pull_request",
+        "${local.github_subject_prefix}:environment:*",
       ]
     }
   }
