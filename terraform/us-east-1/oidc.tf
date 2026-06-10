@@ -1,12 +1,22 @@
 locals {
+<<<<<<< Updated upstream
   github_owner = "stvnlm"
   github_repo  = "terraform-daycarewatch"
+=======
+  github_owner  = "StvnLm"
+  github_repo   = "daycareScout"
+>>>>>>> Stashed changes
   github_branch = "main"
 
   role_name  = "github-actions-${local.github_repo}"
 
   github_subject = "repo:${local.github_owner}/${local.github_repo}:ref:refs/heads/${local.github_branch}"
 }
+
+#########################################################
+# To do: create new S3 bucket (daycareScout) and update #
+# the backend state bucket to use new naming            # 
+#########################################################
 
 resource "aws_iam_openid_connect_provider" "github" {
   url             = "https://token.actions.githubusercontent.com"
