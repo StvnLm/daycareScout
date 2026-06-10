@@ -33,7 +33,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
         with:
-          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions-terraform-daycareScout
+          role-to-assume: arn:aws:iam::290993051279:role/github-actions-terraform-daycareScout
           aws-region: us-east-1
 
       - name: Setup Terraform
